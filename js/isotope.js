@@ -261,7 +261,14 @@ var trim = String.prototype.trim ?
         visibleUnmatched.push( item );
       }
     }
-
+    
+    //if we specify the maxItems options, adjust matches and move extra items
+    if(this.options.maxItems && Number.isInteger(this.options.maxItems)){
+      while(matches.length > this.options.maxItems){
+          var extraitem = matches.pop();
+          visibleUnmatched.push(extraitem);
+      }
+    }
     // return collections of items to be manipulated
     return {
       matches: matches,
